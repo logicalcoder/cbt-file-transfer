@@ -61,22 +61,27 @@ router.post('/serve-file', (req, res) => {
    .catch(err => res.send({ status: 'error', err }));
 });
 
-router.post('/test', (req, res) => {
-  let imgStream = 'data:image/png;base64,';
 
-  renderStream.on("data", function (data) {
-    console.log('render dat', data);
-    imgStream += Buffer.from(data).toString("base64");
+
+router.post('/transfer', (req, res) => {
+  console.log('Hitting server')
+
+  res.json({ 
+    mimetype: req.headers['x-mime-type'],
+    contentType: req.headers['content-type'],
+    cellphone: req.headers['x-cellphone'],
+    // stream: req.stream,
+    message: `Successfully uploaded`
   });
 });
 
-router.post('/transfer', (req, res) => res.json({ 
-  mimetype: req.headers['x-mime-type'],
-  contentType: req.headers['content-type'],
-  cellphone: req.headers['x-cellphone'],
-  // stream: req.stream,
-  message: `Successfully uploaded`
-}));
+// router.post('/transfer', (req, res) => res.json({ 
+//   mimetype: req.headers['x-mime-type'],
+//   contentType: req.headers['content-type'],
+//   cellphone: req.headers['x-cellphone'],
+//   // stream: req.stream,
+//   message: `Successfully uploaded`
+// }));
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
