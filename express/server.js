@@ -11,8 +11,6 @@ router.get('/', (req, res) => {
   res.write('<h1>Testing server!</h1>');
   res.end();
 });
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
-router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 router.post('/transfer', (req, res) => res.json({ 
   mimetype: req.headers['x-mime-type'],
