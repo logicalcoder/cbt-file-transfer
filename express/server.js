@@ -64,7 +64,9 @@ router.post('/serve-file', (req, res) => {
 
 
 router.post('/transfer', (req, res) => {
-  console.log('Hitting server')
+  console.log('Hitting server');
+  console.log('mimetype =>', req.headers['x-mime-type']);
+  console.log('contentType =>', req.headers['content-type']);
 
   res.json({ 
     mimetype: req.headers['x-mime-type'],
