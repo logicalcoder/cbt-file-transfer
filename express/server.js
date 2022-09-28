@@ -61,7 +61,12 @@ router.post('/serve-file', (req, res) => {
    .catch(err => res.send({ status: 'error', err }));
 });
 
-
+router.post('/upload', (req, res) => {
+  const filePath = path.join(__dirname, `/image.jpg`);
+  uploadFile(req, filePath)
+    .then(path => res.send({ status: 'success', path }))
+    .catch(err => res.send({ status: 'error', err }));
+ });
 
 router.post('/transfer', (req, res) => {
   console.log('Hitting server');
@@ -85,7 +90,7 @@ router.post('/transfer', (req, res) => {
 //   message: `Successfully uploaded`
 // }));
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
