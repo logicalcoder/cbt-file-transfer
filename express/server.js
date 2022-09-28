@@ -63,7 +63,12 @@ router.post('/serve-file', (req, res) => {
 });
 
 router.post('/upload', (req, res) => {
-  const filePath = path.join(__dirname, `/image.jpg`);
+  // const filePath = path.join(__dirname, `/image.jpg`);
+  
+  const filePath = '/tmp/image.jpg';
+
+  console.log('filepath => ', filePath);
+
   uploadFile(req, filePath)
     .then(path => res.send({ status: 'success', path }))
     .catch(err => res.send({ status: 'error', err }));
