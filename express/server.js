@@ -50,7 +50,8 @@ const uploadFile = (req, filePath) => {
 // Add a route to accept incoming post requests for the fileupload.
 // Also, attach two callback functions to handle the response.
 router.post('/serve-file', (req, res) => {
-  const filePath = path.join(__dirname, `/image.jpg`);
+  // const filePath = path.join(__dirname, `/image.jpg`);
+  const filePath = '/tmp/image.jpg';
   uploadFile(req, filePath)
     .then(path => {
       res.writeHead(200, { 'Content-Type': 'text/html' });
